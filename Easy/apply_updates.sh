@@ -2,7 +2,7 @@
 
 # apply_updates.sh
 # Run from inside ~/RE-Linux/Easy:
-# source apply_updates.sh
+#   source apply_updates.sh
 #
 # Creates all .Game_Files structure and writes every corrected file in place.
 
@@ -495,6 +495,7 @@ ENDOFFILE
 cat > "$GAME_DIR/.Game_Files/Scenes/suspect_wesker.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_dramatic.sh"
 
+clear
 typewriter_dramatic ""
 typewriter_dramatic "        Jill: Barry... that .orders.txt couldn't be..."
 typewriter_dramatic "        Barry: We need to find Captain Albert Wesker immediately."
@@ -504,6 +505,7 @@ ENDOFFILE
 cat > "$GAME_DIR/.Game_Files/Scenes/self-destruct-sequence.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
+clear
 typewriter_regular ""
 typewriter_regular "    [Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]"
 typewriter_regular "    [Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY THROUGH]"
@@ -514,6 +516,7 @@ ENDOFFILE
 cat > "$GAME_DIR/.Game_Files/Scenes/TwoSurvivors.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
+clear
 typewriter_regular ""
 typewriter_regular "    Outside, the Emergency_Helipad was boxed in, hidden among the trees with"
 typewriter_regular "    the sounds of a helicopter in the distance. The sun was starting to rise,"
@@ -535,7 +538,7 @@ typewriter_regular ""
 typewriter_regular "        BARRY: Shit! I'm empty! Jill--"
 typewriter_regular ""
 typewriter_regular "    Jill dove away as the Tyrant dashed between them with its claw"
-typewriter_regular "    jutting out. The Tyrant stood between them, looking from one to the other."
+typewriter_regular "    jutting out. The Tyrant stood, towering, looking from one to the other."
 typewriter_regular "    Deciding which one to annihilate first."
 typewriter_regular ""
 typewriter_regular "        BRAD: USE THIS! KILL THAT MONSTER!"
@@ -588,6 +591,7 @@ ENDOFFILE
 cat > "$GAME_DIR/.Game_Files/Scenes/ThreeSurvivors.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
+clear
 typewriter_regular ""
 typewriter_regular "    Outside, the Emergency_Helipad was boxed in, hidden among the trees with"
 typewriter_regular "    the sounds of a helicopter in the distance. The sun was starting to rise,"
@@ -658,6 +662,7 @@ echo "  Scene files written"
 cat > "$GAME_DIR/.Game_Files/Scenes/End-Game/good/good_ending.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
+clear
 typewriter_regular ""
 typewriter_regular "    JILL PLANTED HER FEET, AND TOOK AIM. BRACING HERSELF AS THE ROCKET LAUNCHED. THE"
 typewriter_regular "    TYRANT STARED AT THE MISSILE CURIOUSLY BEFORE EXPLODING INTO A MILLION LITTLE"
@@ -718,6 +723,7 @@ ENDOFFILE
 cat > "$GAME_DIR/.Game_Files/Scenes/End-Game/bad/bad_ending.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_dramatic.sh"
 
+clear
 typewriter_dramatic ""
 typewriter_dramatic "    JILL FIRED THE ROCKET LAUNCHER, WATCHING AS THE TYRANT RAISED ITS GIANT CLAW,"
 typewriter_dramatic "    DEFLECTING THE MISSILE. IT SOARED INTO THE SKY, EXPLODING AGAINST THE HELICOPTER TAIL."
@@ -776,6 +782,7 @@ ENDOFFILE
 cat > "$GAME_DIR/.Game_Files/Scenes/End-Game/great/great_ending.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
+clear
 typewriter_regular ""
 typewriter_regular "    Jill planted her feet, and took aim. Bracing herself as the rocket launched."
 typewriter_regular "    The Tyrant stared at the missile curiously before exploding into a million"
@@ -1258,68 +1265,66 @@ ENDOFFILE
 
 cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/Newspaper_Clippings.txt" << 'ENDOFFILE'
 
-      strange, all these newspaper articles are
-			  about S.T.A.R.S.
-			    . . .
+  Strange. . . .
+  All of these newspaper articles are about S.T.A.R.S.
 
 ENDOFFILE
 
 cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/Security_Protocols.txt" << 'ENDOFFILE'
 
-            SECURITY PROTOCOLS
-        Spencer Mansion is on lockdown. Unauthorized persons
-				attempting to leave will be shot on site.
-				Everyone with Clearance Level: Executive must exit
-				through the .private_elevator located in bluedoor and
-				head directly to the Emergency_Helipad for evacuation.
+  SECURITY PROTOCOLS
 
-						BASEMENT LEVEL
-				Research_Office | For use by the Special Research Division
-				only. All other access to the Visual Data Room must be
-				cleared with Keith Arving, Room Manager.
+  Spencer Mansion is on lockdown. Unauthorized persons attempting to leave
+  will be shot on site. Everyone with Clearance Level: Executive must exit
+  through the .private_elevator located in bluedoor and head directly to
+  the Emergency_Helipad for evacuation.
 
-				Holding_Cells | controls the use of the prison. At least
-				one Consultant Researcher (E. Smith, S. Ross, A. Wesker)
-				must be present if viral use is authorized.
+  BASEMENT LEVEL
 
-				Passage_to_Helipad | is prohibited unless accompanied by
-				a Consultant Researcher or the Chief of Security.
-				Unauthorized persons entering the helipad will be
-				shot on site.
+  Research_Office | For use by the Special Research Division only. All other
+  access to the Visual Data Room must be cleared with Keith Arving, Room Manager.
 
-				Cultivation_Room | Regarding the progress of Tyrant after
-				the administration of T-Virus...
+  Holding_Cells | Controls the use of the prison. At least one Consultant
+  Researcher (E. Smith, S. Ross, A. Wesker) must be present if viral use
+  is authorized.
 
-				(Illegible hereafter...)
+  Passage_to_Helipad | Is prohibited unless accompanied by a Consultant
+  Researcher or the Chief of Security. Unauthorized persons entering the
+  helipad will be shot on site.
+
+  Cultivation_Room | Regarding the progress of Tyrant after the
+  administration of T-Virus...
+
+  (Illegible hereafter...)
 
 ENDOFFILE
 
 cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Research_Office/.orders.txt" << 'ENDOFFILE'
-********************
-    CONFIDENTIAL
-				Attn: Chief of Security
-				Date: July 22, 1998 2:13
 
-    ALBERT,
+  ********************
+  CONFIDENTIAL
+  Attn: Chief of Security
+  Date: July 22, 1998 2:13
 
-				X Day is drawing upon us. Execute the following
-				procedures within one week. Prompt actions are
-				demanded.
+  ALBERT,
 
-				1. Lure S.T.A.R.S. to the estate, and obtain raw combat
-				data against B.O.W.s
+  X Day is drawing upon us. Execute the following procedures within one
+  week. Prompt actions are demanded.
 
-				2. Dispose of the Tyrant in the Cultivation_Room
-				password: eagle
+  1. Lure S.T.A.R.S. to the estate, and obtain raw combat data against
+     B.O.W.s
 
-				3. Ensure complete disposal of the Arklay Laboratory
-				including all personnel and test animals. Disguise their
-				deaths as an accident. When the above procedures are
-				executed, report to headquarters for further instructions.
+  2. Dispose of the Tyrant in the Cultivation_Room
+     password: eagle
 
-    Good luck.
-			Umbrella Headquarters,
-			Umbrella Inc.
+  3. Ensure complete disposal of the Arklay Laboratory including all
+     personnel and test animals. Disguise their deaths as an accident.
+     When the above procedures are executed, report to headquarters for
+     further instructions.
+
+  Good luck.
+  Umbrella Headquarters,
+  Umbrella Inc.
 
 ENDOFFILE
 
@@ -1348,6 +1353,7 @@ ENDOFFILE
 cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Cultivation_Room/Enter_Cultivation_Room.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
+clear
 typewriter_regular ""
 typewriter_regular "    Jill read the name of the directory, Cultivation_Room, on the"
 typewriter_regular "    blast door. Entering the password, the blast door lifted up."
