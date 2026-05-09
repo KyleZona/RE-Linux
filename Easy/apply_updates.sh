@@ -1130,6 +1130,228 @@ ENDOFFILE
 echo "  SourceMeToStart.sh written"
 
 
+# ─── Map directories ──────────────────────────────────────────────────────────
+
+mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors"
+mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/browndoor"
+mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Research_Office"
+mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Cultivation_Room"
+mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Emergency_Helipad"
+
+echo "  map directories created"
+
+# ─── Map files ────────────────────────────────────────────────────────────────
+
+cat > "$GAME_DIR/raccoon_forest/Barry_Help.txt" << 'ENDOFFILE'
+
+	use command 'ls' to list out what is inside the directory.
+
+		[name@name] ~$:  ls
+		#terminal returns: Barry_Help.txt oswell_spencer_mansion
+
+	.txt = a text file (typically font color: white)
+
+	 oswell_spencer_mansion (typically font color: blue)
+		oswell_spencer_mansion is a directory.
+
+	use command cd to change directories.
+	This command uses specific SYNTAX to navigate:
+
+	'.' means current directory
+	'/' seperates directory names in a path
+		long path: ~/RE-Linux/Easy/raccoon_forest/oswell_spencer_mansion
+		short path: ./oswell_spencer_mansion
+	'./' together -- means "starting from where I am right now..."
+
+	'cd' means to change the directory.
+
+	all together, the correct syntax would be:
+		[name@name] ~$: cd ./oswell_spencer_mansion
+
+	! when typing, Linux will automatically bold things that do exist and
+	unbold things that it can't find. This is very helpful! Especially since
+	a lot of the names are UpperCase or-Even_like-This.
+
+		good luck!
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/Help_Barry.txt" << 'ENDOFFILE'
+use command cd to change directory to doubledoors
+remember to start your command with ./
+the syntax: cd ./directory_name
+
+cd ./doubledoors
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/Barry_Help1.txt" << 'ENDOFFILE'
+
+  Remember how ./ means "this current directory"
+  Well command ../ takes the user up one level to
+  the parent directory.
+
+  For this instance, doubledoors is within the
+  mainhall directory.
+
+  enter command: cd ../
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/.Barry_Help2.txt" << 'ENDOFFILE'
+Remember the command ls ?
+That will list everything in the current directory.
+
+However, some things can be hidden by placing a '.'
+in front of the file. To see those hidden items:
+					use command 'ls -la' to search.
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/.Kenneth_Sullivan.txt" << 'ENDOFFILE'
+
+  There is something in his hand, it's a LOCKPICK.
+	Perhaps it could be used on one of the doors in
+	the mainhall.
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/browndoor/Statue_with_Vase.txt" << 'ENDOFFILE'
+
+  Is there a hidden file in the vase?
+  What did Barry say about ls again?
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/browndoor/.something_hidden_in_vase.txt" << 'ENDOFFILE'
+
+			Keeper's Diary
+
+				May 12th, 1998.
+
+			The space suit has me itching all over — I skipped feeding the
+			dogs today out of spite, and felt better for it. By the 13th,
+			the doctor bandaged my swollen back and said I could lose the suit.
+			Then the company locked the grounds down, a researcher got shot
+			trying to leave. They changed the bluedoor password, as if there
+			was a way out through there. My skin started sloughing off in
+			chunks when I scratched.
+
+				May 19th —9—8
+
+			fever gone. Killed Scott, tasted fine.
+			heard them whisper that the blue door password was changed to
+			itchytasty
+
+			Itchy. Tasty. Itchy. Reminds me of Scott.
+            And the others I ——
+			Tasty.
+			Itchy. Tasty. Itchy. Tasty.
+			Itchy. Tasty. Itchy. Tasty.
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/ResearchersWill.txt" << 'ENDOFFILE'
+
+				Yes, I am infected.
+				I did everything I could to prevent
+				this accident from reaching the public,
+				but I can only delay the inevitable
+				for so long. . .
+
+				At least the private_elevator is hidden.
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/Newspaper_Clippings.txt" << 'ENDOFFILE'
+
+      strange, all these newspaper articles are
+			  about S.T.A.R.S.
+			    . . .
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/Security_Protocols.txt" << 'ENDOFFILE'
+
+            SECURITY PROTOCOLS
+        Spencer Mansion is on lockdown. Unauthorized persons
+				attempting to leave will be shot on site.
+				Everyone with Clearance Level: Executive must exit
+				through the .private_elevator located in bluedoor and
+				head directly to the Emergency_Helipad for evacuation.
+
+						BASEMENT LEVEL
+				Research_Office | For use by the Special Research Division
+				only. All other access to the Visual Data Room must be
+				cleared with Keith Arving, Room Manager.
+
+				Holding_Cells | controls the use of the prison. At least
+				one Consultant Researcher (E. Smith, S. Ross, A. Wesker)
+				must be present if viral use is authorized.
+
+				Passage_to_Helipad | is prohibited unless accompanied by
+				a Consultant Researcher or the Chief of Security.
+				Unauthorized persons entering the helipad will be
+				shot on site.
+
+				Cultivation_Room | Regarding the progress of Tyrant after
+				the administration of T-Virus...
+
+				(Illegible hereafter...)
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Research_Office/.orders.txt" << 'ENDOFFILE'
+********************
+    CONFIDENTIAL
+				Attn: Chief of Security
+				Date: July 22, 1998 2:13
+
+    ALBERT,
+
+				X Day is drawing upon us. Execute the following
+				procedures within one week. Prompt actions are
+				demanded.
+
+				1. Lure S.T.A.R.S. to the estate, and obtain raw combat
+				data against B.O.W.s
+
+				2. Dispose of the Tyrant in the Cultivation_Room
+				password: eagle
+
+				3. Ensure complete disposal of the Arklay Laboratory
+				including all personnel and test animals. Disguise their
+				deaths as an accident. When the above procedures are
+				executed, report to headquarters for further instructions.
+
+    Good luck.
+			Umbrella Headquarters,
+			Umbrella Inc.
+
+ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Holding_Cells/Barry_Help.txt" << 'ENDOFFILE'
+
+    Barry: There are so many cells.
+      We've used command ls plenty of times, and we've used ls -la too.
+      Now let's learn a new command and build on that.
+
+    Enter command ls -R
+      This command will list out all the folders and files that are
+      relative to this current directory.
+
+    But we know that folders and files can be hidden.
+    So let's update the syntax to show us those too.
+
+    Enter command ls -Ra
+      This command will list out all the folders and files,
+      including hidden files, that are relative to the directory.
+
+    Warning: enter the wrong cell, and you will die.
+    Barry: So let's enter the one with Chris, yeah?
+
+ENDOFFILE
+
+echo "  map files written"
+
 # ─── PLAYER_GUIDE ─────────────────────────────────────────────────────────────
 
 cat > "$GAME_DIR/PLAYER_GUIDE" << 'ENDOFFILE'
