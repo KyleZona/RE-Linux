@@ -23,7 +23,6 @@ mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.pri
 mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Holding_Cells/Cell_3"
 mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Holding_Cells/Cell_4"
 mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Holding_Cells/Cell_5"
-mkdir -p "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Holding_Cells/Cell_7"
 
 echo "  directories created"
 
@@ -230,12 +229,12 @@ echo "  Command                    What It Does"
 echo "  -------                    ------------"
 echo "  ls                         List contents of the current directory"
 echo "  ls -la                     List all contents, including hidden files"
+echo "  ls -Ra                     List all contents recursively, including hidden files"
 echo "  cd ./name                  Change into a directory"
 echo "  cd ../                     Go back to the previous directory"
 echo "  cat ./file.txt             Read a file"
 echo "  pwd                        Print your current directory path"
 echo "  man command                Read the manual for any command"
-echo "  grep -r \"term\" .           Search all files recursively for a term"
 echo ""
 
 # clean up and fully reset
@@ -688,12 +687,12 @@ echo "  Command                    What It Does"
 echo "  -------                    ------------"
 echo "  ls                         List contents of the current directory"
 echo "  ls -la                     List all contents, including hidden files"
+echo "  ls -Ra                     List all contents recursively, including hidden files"
 echo "  cd ./name                  Change into a directory"
 echo "  cd ../                     Go back to the previous directory"
 echo "  cat ./file.txt             Read a file"
 echo "  pwd                        Print your current directory path"
 echo "  man command                Read the manual for any command"
-echo "  grep -r \"term\" .           Search all files recursively for a term"
 echo ""
 
 # exit game and reset files
@@ -746,12 +745,12 @@ echo "  Command                    What It Does"
 echo "  -------                    ------------"
 echo "  ls                         List contents of the current directory"
 echo "  ls -la                     List all contents, including hidden files"
+echo "  ls -Ra                     List all contents recursively, including hidden files"
 echo "  cd ./name                  Change into a directory"
 echo "  cd ../                     Go back to the previous directory"
 echo "  cat ./file.txt             Read a file"
 echo "  pwd                        Print your current directory path"
 echo "  man command                Read the manual for any command"
-echo "  grep -r \"term\" .           Search all files recursively for a term"
 echo ""
 
 # exit game and reset files
@@ -810,12 +809,12 @@ echo "  Command                    What It Does"
 echo "  -------                    ------------"
 echo "  ls                         List contents of the current directory"
 echo "  ls -la                     List all contents, including hidden files"
+echo "  ls -Ra                     List all contents recursively, including hidden files"
 echo "  cd ./name                  Change into a directory"
 echo "  cd ../                     Go back to the previous directory"
 echo "  cat ./file.txt             Read a file"
 echo "  pwd                        Print your current directory path"
 echo "  man command                Read the manual for any command"
-echo "  grep -r \"term\" .           Search all files recursively for a term"
 echo ""
 
 # exit game and reset files
@@ -835,7 +834,7 @@ echo "  End-Game files written"
 
 CELLS="$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Holding_Cells"
 
-cat > "$CELLS/Cell_1/zombies.sh" << 'ENDOFFILE'
+cat > "$CELLS/Cell_1/.zombies.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
 typewriter_regular ""
@@ -876,22 +875,7 @@ typewriter_regular ""
 source "$GAME_DIR/.Game_Files/Scenes/death.sh"
 ENDOFFILE
 
-cat > "$CELLS/Cell_3/zombies.sh" << 'ENDOFFILE'
-source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
-
-typewriter_regular ""
-typewriter_regular "    The cell was filled with zombies."
-typewriter_regular ""
-typewriter_regular "    A dozen of them. Maybe more."
-typewriter_regular "    Overpowered Jill and Barry."
-typewriter_regular "    Hands grabbed her hair."
-typewriter_regular "    Teeth at his throat."
-typewriter_regular ""
-
-source "$GAME_DIR/.Game_Files/Scenes/death.sh"
-ENDOFFILE
-
-cat > "$CELLS/Cell_4/zombies.sh" << 'ENDOFFILE'
+cat > "$CELLS/Cell_4/.zombies.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
 typewriter_regular ""
@@ -924,7 +908,7 @@ typewriter_regular ""
 source "$GAME_DIR/.Game_Files/Scenes/death.sh"
 ENDOFFILE
 
-cat > "$CELLS/Cell_7/Chris_Redfield.sh" << 'ENDOFFILE'
+cat > "$CELLS/Cell_3/.Chris_Redfield.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
 typewriter_regular ""
@@ -1386,7 +1370,6 @@ Hint system: Yes
 | cat ./file.txt       | Read a file                                           |
 | pwd                  | Print your current directory path                     |
 | man command          | Read the manual for any command                       |
-| grep -r "term" .     | Search all files recursively for a term               |
 
 Hidden files start with a dot (.) and won't show up with plain ls.
 Always try ls -la when you feel stuck — something may be hidden.
@@ -1584,12 +1567,12 @@ Whether you win or lose, Chris is never found.
 # directory: Holding_Cells
 Barry hints that you should search carefully.
 
-!! CAUTION: Cells 1, 2, 3, 4, and 5 are death traps.
+!! CAUTION: Cells 1, 2, 4, and 5 are death traps.
    Do not enter them without a reason.
 
     cat ./Barry_Help.txt
-    grep -r "Chris" .
-    cd ./Cell_7
+    ls -Ra
+    cd ./Cell_3
 
 After finding Chris, head back out and to the helipad.
 
@@ -1607,7 +1590,7 @@ With Chris rescued, you now have a 100% chance of the Great Ending.
 |--------------|----------------------------------------------------------|
 | Bad Ending   | Go straight to Emergency_Helipad — 65% chance            |
 | Good Ending  | Go straight to Emergency_Helipad — 35% chance            |
-| Great Ending | Find Chris in Cell_7 first, then go to Emergency_Helipad |
+| Great Ending | Find Chris in Cell_3 first, then go to Emergency_Helipad |
 
 ---
 # Password Legend
