@@ -2,7 +2,7 @@
 
 # apply_updates.sh
 # Run from inside ~/RE-Linux/Easy:
-#   source apply_updates.sh
+# source apply_updates.sh
 #
 # Creates all .Game_Files structure and writes every corrected file in place.
 
@@ -78,20 +78,22 @@ echo "  Design files written"
 cat > "$GAME_DIR/.Game_Files/Locks/spencer_lock.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.gamestate"
 echo "LOCKED: Enter Owner's Last Name"
-read -p "Password: " input
+echo -n "Password: "
+read input
 if [ "$input" = "spencer" ]; then
 	sed -i 's/SPENCER_UNLOCKED=false/SPENCER_UNLOCKED=true/' "$GAME_DIR/.gamestate"
 	return 0
 else
 	source "$GAME_DIR/.Game_Files/Scenes/attempt_failed.sh"
-	return 1
+	return $?
 fi
 ENDOFFILE
 
 cat > "$GAME_DIR/.Game_Files/Locks/browndoor_lock.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.gamestate"
 echo "LOCKED: Enter Password"
-read -p "Password: " input
+echo -n "Password: "
+read input
 if [ "$input" = "LOCKPICK" ]; then
 	sed -i 's/BROWNDOOR_UNLOCKED=false/BROWNDOOR_UNLOCKED=true/' "$GAME_DIR/.gamestate"
 	return 0
@@ -105,7 +107,8 @@ ENDOFFILE
 cat > "$GAME_DIR/.Game_Files/Locks/bluedoor_lock.sh" << 'ENDOFFILE'
 source "$GAME_DIR/.gamestate"
 echo "LOCKED: Enter Password"
-read -p "Password: " input
+echo -n "Password: "
+read input
 if [ "$input" = "itchytasty" ]; then
 	sed -i 's/BLUEDOOR_UNLOCKED=false/BLUEDOOR_UNLOCKED=true/' "$GAME_DIR/.gamestate"
 	return 0
@@ -122,7 +125,8 @@ source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 typewriter_regular 'CLEARANCE LEVEL NEEDED FOR ELEVATOR.'
 typewriter_regular 'PLEASE ENTER CLEARANCE LEVEL:'
 
-read -p "Password: " input
+echo -n "Password: "
+read input
 
 if [ "$input" = "Executive" ]; then
 	sed -i 's/PRIVATE_ELEVATOR_UNLOCKED=false/PRIVATE_ELEVATOR_UNLOCKED=true/' "$GAME_DIR/.gamestate"
@@ -138,7 +142,8 @@ source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
 
 typewriter_regular '  PLEASE PROVIDE MEDAL NAME:'
 
-read -p "Password: " input
+echo -n "Password: "
+read input
 
 if [ "$input" = "eagle" ]; then
 	return 0
@@ -546,7 +551,8 @@ typewriter_regular "    now was her moment... She hurried to the box, opening it
 typewriter_regular "    the big weapon."
 typewriter_regular ""
 
-read -p "Password: " input
+echo -n "Password: "
+read input
 
 if [ "$input" = "rocket_launcher" ]; then
 	roll=$((RANDOM % 100))
@@ -560,7 +566,8 @@ else
 	typewriter_regular 'But nothing fired.'
 	typewriter_regular 'She looked back down and'
 	typewriter_regular 'TO FIRE ENTER: rocket_launcher'
-	read -p "Password: " input2
+	echo -n "Password: "
+	read input2
 	if [ "$input2" = "rocket_launcher" ]; then
 		roll=$((RANDOM % 100))
 		if [ $roll -lt 35 ]; then
@@ -620,7 +627,8 @@ typewriter_regular "    right now was her moment... She hurried to the box, open
 typewriter_regular "    the big weapon."
 typewriter_regular ""
 
-read -p "Password: " input
+echo -n "Password: "
+read input
 
 if [ "$input" = "rocket_launcher" ]; then
 	source "$GAME_DIR/.Game_Files/Scenes/End-Game/great/great_ending.sh"
@@ -629,7 +637,8 @@ else
 	typewriter_regular 'But nothing fired.'
 	typewriter_regular 'She looked back down and'
 	typewriter_regular 'TO FIRE ENTER: rocket_launcher'
-	read -p "Password: " input2
+	echo -n "Password: "
+	read input2
 	if [ "$input2" = "rocket_launcher" ]; then
 		source "$GAME_DIR/.Game_Files/Scenes/End-Game/great/great_ending.sh"
 	else
@@ -1090,7 +1099,9 @@ function cd () {
 	fi
 # Cell logic
 	if [[ "$PWD" == */Holding_Cells/Cell_* ]]; then
-		source "$PWD/"*.sh
+		for f in "$PWD/"*.sh "$PWD/".*.sh; do
+			[ -f "$f" ] && source "$f"
+		done
 	fi
 }
 EOF
@@ -1333,6 +1344,103 @@ cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.privat
     Barry: So let's enter the one with Chris, yeah?
 
 ENDOFFILE
+
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/.private_elevator/Umbrella_Laboratory/Cultivation_Room/Enter_Cultivation_Room.sh" << 'ENDOFFILE'
+source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
+
+typewriter_regular ""
+typewriter_regular "    Jill read the name of the directory, Cultivation_Room, on the"
+typewriter_regular "    blast door. Entering the password, the blast door lifted up."
+typewriter_regular ""
+typewriter_regular "    Somewhere inside, someone was typing on a keyboard."
+typewriter_regular ""
+typewriter_regular "    Jill and Barry stepped inside. The blast door locked behind them."
+typewriter_regular "    The air was cold, and a thin fog collected around their boots."
+typewriter_regular "    Jill took a step forward, watching her wonky reflection move in"
+typewriter_regular "    all the large foggy glass tubes that filled the room."
+typewriter_regular "    Through them, she saw him."
+typewriter_regular ""
+typewriter_regular "        Jill: Wesker?"
+typewriter_regular ""
+typewriter_regular "        Wesker: Well, well..."
+typewriter_regular ""
+typewriter_regular "    Wesker didn't even turn around to look at them. Just kept"
+typewriter_regular "    typing on the keyboard."
+typewriter_regular ""
+typewriter_regular "        Barry: Cut the crap, Wesker."
+typewriter_regular "          We read the orders.txt..."
+typewriter_regular ""
+typewriter_regular "        Jill: Why do you have to destroy S.T.A.R.S.?"
+typewriter_regular ""
+typewriter_regular "        Wesker: That's Umbrella's intention. This laboratory has been"
+typewriter_regular "          engaging in dangerous experiments, and recently, an"
+typewriter_regular "          accident occurred. A virus got out. Anyway, this disaster"
+typewriter_regular "          cannot be made public."
+typewriter_regular ""
+typewriter_regular "        Jill: Is that why having S.T.A.R.S. nosing about is so"
+typewriter_regular "          inconvenient? You're a slave to Umbrella, along with"
+typewriter_regular "          these virus monsters."
+typewriter_regular ""
+typewriter_regular "        Wesker: I think you misunderstand me, Jill. I'm going to"
+typewriter_regular "          burn this entire laboratory. If you helped create one"
+typewriter_regular "          of the most powerful biological weapons. . ."
+typewriter_regular "          what would you do?"
+typewriter_regular ""
+typewriter_regular "        Jill: You must stop this now."
+typewriter_regular ""
+typewriter_regular "        Wesker: Hmph. Idiots, no one understands its real value."
+typewriter_regular ""
+typewriter_regular "        Jill: So you're going to steal all the research?"
+typewriter_regular ""
+typewriter_regular "        Wesker: Better yet. I'm going to show you the Tyrant."
+typewriter_regular ""
+typewriter_regular "    Wesker stopped typing on the keyboard. To his left, one of the"
+typewriter_regular "    large tubes started to drain. An ungodly creation inside."
+typewriter_regular "    Over 8 feet tall, with a giant mutated claw as its left hand,"
+typewriter_regular "    and a giant beating heart exposed on the chest."
+typewriter_regular ""
+typewriter_regular "    The Tyrant opened its eyes."
+typewriter_regular ""
+typewriter_regular "        Wesker: The Tyrant is the most powerful biological weapon"
+typewriter_regular "          in the entire world. All this power will be mine. . ."
+typewriter_regular ""
+typewriter_regular "    In one swift motion, the Tyrant broke through the glass with"
+typewriter_regular "    its mutated hand."
+typewriter_regular ""
+typewriter_regular "        Wesker: What? Don't come this way!"
+typewriter_regular ""
+typewriter_regular "    In one second, the Tyrant was out of the test tube and lifting"
+typewriter_regular "    Wesker to his feet. The next, the mutated claw pierced through"
+typewriter_regular "    his chest."
+typewriter_regular ""
+typewriter_regular "        Barry: Jill..."
+typewriter_regular ""
+typewriter_regular "    Barry placed a hand on Jill. Slowly encouraging her to step back"
+typewriter_regular "    quietly before... The Tyrant turned, seeing them. Nowhere to run."
+typewriter_regular ""
+typewriter_regular "    The Tyrant threw Wesker's body across the room into a panel of"
+typewriter_regular "    computer devices. Then the towering monster bared its oversized"
+typewriter_regular "    teeth at them."
+typewriter_regular ""
+typewriter_regular "        Jill: Barry, fire!"
+typewriter_regular ""
+typewriter_regular "    Both S.T.A.R.S. members aimed, and fired everything into the"
+typewriter_regular "    Tyrant's exposed beating heart. Barry's Colt .45 knocked the"
+typewriter_regular "    Tyrant off its feet."
+typewriter_regular ""
+typewriter_regular "          [Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]"
+typewriter_regular "    		[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY...]"
+typewriter_regular ""
+typewriter_regular "    Around them, emergency lights flashed. A loud siren blared on repeat."
+typewriter_regular ""
+typewriter_regular "        Barry: Jill we have to escape!"
+typewriter_regular ""
+
+# cultivation room logic
+sed -i 's/CULTIVATION_COMPLETE=false/CULTIVATION_COMPLETE=true/' "$GAME_DIR/.gamestate"
+ENDOFFILE
+
+echo "  Enter_Cultivation_Room.sh written"
 
 echo "  map files written"
 
