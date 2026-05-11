@@ -1,0 +1,270 @@
+# Easy — Player Guide
+# A Resident Evil-themed Linux terminal adventure
+
+---
+# Before You Begin
+This game is played entirely in your Linux terminal. You'll navigate a directory
+structure that mirrors the Spencer Mansion, read files to uncover the story, and
+enter passwords to unlock new areas — all using real Linux commands.
+Who knows, maybe you'll even survive!
+
+Difficulty: Easy
+
+Hint system: Yes
+    Look for Barry_Help.txt files throughout the game.
+    When you're stuck, use cat to open one:
+
+    cat ./Barry_Help.txt
+
+---
+# Commands You'll Use
+
+| Command              | What It Does                                          |
+|----------------------|-------------------------------------------------------|
+| ls                   | List contents of the current directory                |
+| ls -la               | List all contents, including hidden files             |
+| ls -Ra               | List all contents recursively, including hidden files |
+| cd ./name            | Change into a directory                               |
+| cd ../               | Go back to the parent directory                       |
+| cat ./file.txt       | Read a file                                           |
+| pwd                  | Print your current directory path                     |
+| man command          | Read the manual for any command                       |
+
+Hidden files start with a dot (.) and won't show up with plain ls.
+Always try ls -la when you feel stuck — something may be hidden.
+
+---
+# How Passwords Work
+Some directories are locked. When prompted, type the password and press Enter.
+You can see what you are typing.
+
+If you enter an incorrect password, pay attention — you only get one more attempt
+before something bad happens.
+
+Passwords are always hidden somewhere in the game world. Read everything.
+
+---
+# The Story So Far
+It's July 1998. S.T.A.R.S. Alpha Team is searching Raccoon Forest for Bravo Team,
+who vanished during a mission. After a violent attack, the surviving members flee
+into a nearby mansion for safety.
+
+You play as Jill Valentine.
+
+---
+# How to Play
+1. Clone the repo into your Linux environment:
+   git clone https://github.com/KyleZona/RE-Linux
+
+2. Move into the game directory:
+   cd RE-Linux/Easy
+
+3. Start the game:
+   source SourceMeToStart.sh
+
+---
+# Walkthrough
+
+---
+# directory: raccoon_forest
+Game begins here. Barry leaves a hint right away — read it.
+
+    cat ./Barry_Help.txt
+
+Then explore.
+
+    ls
+    cd ./oswell_spencer_mansion
+    > Password: spencer
+
+---
+# directory: oswell_spencer_mansion -> mainhall
+You're inside the mansion now.
+
+    ls
+
+You'll see doubledoors. Head there first.
+
+    cd ./doubledoors
+
+---
+# directory: doubledoors
+Explore, then head back.
+
+    ls
+    cat ./Barry_Help1.txt
+    cd ../
+
+(cd ../ takes you back up one level, to mainhall)
+
+---
+# directory: mainhall
+Back in mainhall, Barry suggests searching more carefully.
+
+    ls -la
+
+Two hidden doors appear: browndoor and bluedoor. You'll need passwords for both.
+Head back to doubledoors to look for clues.
+
+    cd ./doubledoors
+
+---
+# directory: doubledoors
+Something is hidden in here.
+
+    ls -la
+    cat ./.Kenneth_Sullivan.txt
+
+You found something useful on Kenneth's body.
+
+    cd ../
+
+---
+# directory: mainhall
+
+    cd ./browndoor
+    > Password: LOCKPICK
+
+---
+# directory: browndoor
+Search everything in here — including things that look empty at first.
+
+    ls
+    cat ./Statue_with_Vase.txt
+    ls -la
+    cat ./.something_hidden_in_vase.txt
+
+The Keeper's Diary reveals the password for the bluedoor.
+
+    cd ../
+
+---
+# directory: mainhall
+
+    cd ./bluedoor
+    > Password: itchytasty
+
+---
+# directory: bluedoor
+Read all three files in here. One of them is especially important.
+
+    ls
+    cat ./ResearchersWill.txt
+    cat ./Newspaper_Clippings.txt
+    cat ./Security_Protocols.txt
+
+The security protocols mention a hidden elevator. Now search for what's hidden.
+
+    ls -la
+    cd ./.private_elevator
+    > Password: Executive
+
+---
+# directory: .private_elevator -> Umbrella_Laboratory
+The elevator takes you underground into an Umbrella facility.
+A scene plays automatically when you arrive.
+
+---
+# directory: Umbrella_Laboratory
+You're underground now. Look around.
+
+    ls
+
+You'll see several directories. Only Research_Office is accessible right now.
+
+    cd ./Research_Office
+
+---
+# directory: Research_Office
+Search carefully — something important is hidden in here.
+
+    ls
+    ls -la
+    cat ./.orders.txt
+
+The orders reveal the password for the Cultivation_Room — and something much
+worse about Wesker.
+
+    cd ../
+
+---
+# directory: Umbrella_Laboratory
+
+    cd ./Cultivation_Room
+    > Password: eagle
+
+---
+# directory: Cultivation_Room
+A confrontation with Wesker. And something far worse waiting inside one of the
+tubes. After the scene plays out, all remaining doors unlock.
+
+    cd ../
+
+---
+# PLEASE BE AWARE
+#### The Ending Split
+After escaping the Cultivation_Room, you have a choice.
+
+In Umbrella_Laboratory, Holding_Cells and Emergency_Helipad are now unlocked.
+This is where your ending is decided.
+
+---
+#### Path A — Emergency_Helipad (Good or Bad Ending)
+
+    cd ./Emergency_Helipad
+    > Password: rocket_launcher
+
+There is a 35% chance of the Good Ending and a 65% chance of the Bad Ending.
+Whether you win or lose, Chris is never found.
+
+---
+#### Path B — Holding_Cells first (Great Ending)
+
+    cd ./Holding_Cells
+
+---
+# directory: Holding_Cells
+Barry hints that you should search carefully.
+
+!! CAUTION: Cells 1, 2, 4, and 5 are death traps.
+   Do not enter them without a reason.
+
+    cat ./Barry_Help.txt
+    ls -Ra
+    cd ./Cell_3
+
+After finding Chris, head back out and to the helipad.
+
+    cd ../
+    cd ../
+    cd ./Emergency_Helipad
+    > Password: rocket_launcher
+
+With Chris rescued, you now have a 100% chance of the Great Ending.
+
+---
+# Endings Summary
+
+| Ending       | How to Get It                                            |
+|--------------|----------------------------------------------------------|
+| Bad Ending   | Go straight to Emergency_Helipad — 65% chance            |
+| Good Ending  | Go straight to Emergency_Helipad — 35% chance            |
+| Great Ending | Find Chris in Cell_3 first, then go to Emergency_Helipad |
+
+---
+# Password Legend
+
+| Password          | Found In                       | Unlocks                 |
+|-------------------|--------------------------------|-------------------------|
+| spencer           | Context / story                | oswell_spencer_mansion  |
+| LOCKPICK          | .Kenneth_Sullivan.txt          | browndoor               |
+| itchytasty        | .something_hidden_in_vase.txt  | bluedoor                |
+| Executive         | Security_Protocols.txt         | .private_elevator       |
+| eagle             | .orders.txt                    | Cultivation_Room        |
+| rocket_launcher   | Shown on weapon box            | Fire weapon / endings   |
+
+---
+Part of the Learning Linux Through Resident Evil series.
+
+Up next:
+    More_Basics_w-Jill — same mansion, fewer hints.
