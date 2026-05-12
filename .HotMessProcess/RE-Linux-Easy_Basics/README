@@ -1,0 +1,49 @@
+# RE-Linux-Easy_Basics
+### A Resident Evil-themed Linux terminal game for beginners
+
+Welcome to Easy_Basics_w-Jill — a story-driven, command-line adventure 
+set in the world of Resident Evil. You play as Jill Valentine with Barry Burton
+navigating the Spencer Mansion using real Linux commands.
+
+No prior Linux experience required. The game teaches you as you play.
+
+---
+## What You'll Practice
+- `ls` — list directory contents
+- `cd` — change directories
+- `cat` — read files
+- `ls -la` — list all files, including hidden files
+- `ls -Ra` — ist all files recursively, including hidden files
+- `pwd` — print working directory
+- `man` — read command manuals
+
+---
+## Requirements
+- A Linux environment (VM, WSL, or native Linux)
+- Bash shell
+
+---
+## How to Play
+1. Clone the repo into your Linux environment:
+git clone https://github.com/KyleZona/RE-Linux-Easy_Basics
+
+2. Move into the directory:
+cd RE-Linux-Easy_Basics
+
+3. Start the game:
+source SourceMeToStart.sh
+
+---
+## Need Help?
+If you get stuck, look for a `HelpBarry.txt` file in your current directory.
+Then use command 'cat' to open it. Barry has got you covered.
+
+cat HelpBarry.txt
+
+---
+## Part of a Series
+This game is part of the Learning Linux Through Resident Evil project.  
+Follow the full series at: https://www.kylezona.com/the-blog
+
+Difficulty: Easy  
+Next: More_Basics_w-Jill *(coming soon)*

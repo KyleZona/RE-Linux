@@ -1,0 +1,18 @@
+
+    Barry: There are so many cells.
+      We've used command ls plenty of times, and we've used ls -la too.
+      now let's use learn a new command and build on that.
+
+    Enter command ls -R
+      This command will list out all the folders and files that are
+      relative to this current directory.
+
+    But we know that folders and files can be hidden.
+    So let's update the syntax to show us those too.
+
+    Enter command ls -Ra
+      This command will list out all the folders and files,
+      including hidden files, that are relative to the directory.
+
+    Warning: enter the wrong cell, and you will die.
+    Barry: So let's enter the one with Chris, yeah?

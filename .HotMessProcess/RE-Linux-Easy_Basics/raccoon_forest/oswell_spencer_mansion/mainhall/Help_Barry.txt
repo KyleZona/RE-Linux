@@ -1,0 +1,6 @@
+
+use command cd to change directory to doubledoors
+remember to to start your command with ./
+the syntax: cd ./directory_name
+
+cd ./doubledoors

@@ -1,0 +1,1231 @@
+# Formerly: Basics_w_Jill — renamed Easy_Basics_w_Jill on April 28, 2026
+# this is the structure for jill valentine
+
+server: theumbrellaconspiracy
+user: jillvalentine
+password: stars
+
+raccoon_forest
+	oswell_spencer_mansion
+		mainhall
+			doubledoors
+			browndoor
+			bluedoor
+				hiddenelevator
+					Umbrella_Laboratory
+						Research_Office
+						Cultivation_Room
+						Holding_Cells
+							Cell_1
+							Cell_2
+							Cell_3
+							Cell_4
+							Cell_5
+							Cell_6
+							Cell_7
+							Cell_8
+							Cell_9
+							Cell_10
+						Emergency_Helipad
+
+##### FORMAT
+
+dir:
+auto: .txt or .sh
+typewriter () {
+
+}
+####### player command
+	# NOTES, etc.
+
+##### player guide #####
+# DIFFICULTY: Easy
+# player may cat ./HelpBarry.txt for hints on how to move forward
+
+server: theumbrellaconspiracy
+user: jillvalentine
+password: stars
+
+dir: raccoon_forest
+	auto: .opening.sh
+		typewriter() {
+
+				— 1998 July — Raccoon Forest
+
+			Chris Redfield: Alpha Team is flying around the forest
+			zone, situated in northwest Raccoon City, where we're
+			searching for the helicopter of our compatriots
+			Bravo Team, who disappeared during the middle of their
+			mission.
+
+				Captain Wesker: Anyone seeing anything?
+				Barry Burton: Nothing yet.
+				Chris: Bizarre murder cases have recently occurred in
+
+			Raccoon City. There are outlandish reports of families
+			being attacked by a group of about 10 people. Victims
+			were apparently eaten. Bravo Team went to the hideout
+			of the group, and disappeared.
+
+				Jill: Look, Chris!
+				Chris: It was Bravo Team's helicopter. Nobody was in it.
+
+			But strangely, most of the equipment was still there.
+			However, we soon discovered why.
+
+			Joseph's scream tore through the clearing.
+			In his hand — a severed hand, still clutching a pistol.
+
+			Rabid beasts jumped from the tall grass, hitting Joseph
+			like a wave. The other four S.T.A.R.S. members spun
+			to see Joseph's final moments.
+
+			Chris fired, snapping Jill out of pure shock. More rabid
+			. . . dogs? appeared. The team took off running back to the
+			helicopter gaining some distance.
+
+				Chris: No! Don't go!
+
+			The helicopter flew off into the dark horizon, leaving
+			the team standing there. The rabid dogs were getting
+			closer...
+
+				Chris: Jill! Run for that house!
+
+			It wasn't a house, it was a mansion. A perfect place to
+			find safety… Except the doors didn't open. Hardly budged.
+
+				cat ./Barry_Help.txt
+
+		}
+
+####### player command
+	cat ./Barry_Help.txt
+		typewriter () {
+
+			use command ls to list out what is inside the directory
+			then use command cd to change directories.
+			for example cd ./directory_name
+			for reference, "." means current directory
+
+		}
+
+	ls
+		# ./oswell_spencer_mansion
+		# ./Barry_Help.txt
+	cd ./oswell_spencer_mansion
+		LOCKED: please enter owner last name: spencer
+		# if incorrect:
+			auto: ./.attempt_failed.sh
+				typewriter () {
+					Rabid dogs stopped a few feet away.
+					Growling, charging up, Jill looked
+					back to the screen that read:
+
+					FAILED ATTEMPT.
+
+					ONLY ONE MORE ALLOWED.
+
+
+				}
+
+		# if incorrect 2nd time:
+			auto: ./.death.sh
+				typewriter () {
+
+					YOU
+
+						ARE
+
+							DEAD
+
+					Clear
+
+					Checking for memory card . . .
+
+						. . . checking . . .
+
+							. . . checking . . .
+
+					. . . No memory card inserted
+
+					Clear
+
+						G O O D
+
+						L U C K
+
+						N E X T
+
+						T I M E
+
+							:)
+
+					# RESET FILES
+
+					mv
+
+					# EXIT PLAYER OUT
+
+					exit
+
+				}
+
+		# if correct, then:
+		#terminal: directory change to /oswell_spencer_mansion
+
+dir: /oswell_spencer_mansion
+	auto: cd ./mainhall
+		#terminal: directory change to /mainhall
+
+dir: /mainhall
+	auto: .enter_mainhall1.sh
+		typewriter () {
+
+			They have escaped into the mansion, where they thought it
+			was safe.
+			Yet . . .
+
+			Barry: Where are we?
+				Type command: man pwd - man explains what pwd does
+				Then, type command: pwd
+
+		}
+####### player command
+	man pwd
+		# terminal: explains command pwd
+	pwd
+		# terminal: /mainhall
+		# auto: .enter_mainhall2.sh
+	auto: .enter_mainhall2.sh
+		typewriter () {
+
+				Wesker: Wow, what a mansion!
+
+			They stood on a lush red rug that went from the large
+			front doors all the way up the grand staircase. Marble
+			floors caught bright flashes of thunder outside, booming
+			all around them in the large main hall.
+
+				Jill: Captain Wesker, where's Chris?
+				Wesker: Stop it! Don't open that door!
+				Jill: But Chris is--
+
+			...might be out there, Jill was saying but a gun went off
+			somewhere in the mansion, to the left, behind some
+			DoubleDoors.
+		
+
+				Barry: What is it?
+				Wesker: Maybe it's... Chris...
+
+			Now, Jill--Can you go?
+
+				Barry: I'm going with you. Chris is our old partner, ya know.
+				Wesker: Stay alert!
+
+			Jill was relieved Barry was coming with her.
+			And that he was bringing his Colt .45 with him.
+			Remember the previous commands used.
+
+		}
+
+####### player command
+	ls
+		# ./doubledoors
+		# ./.browndoor | HIDDEN | .searching_mainhall.sh=false | ./.password_unknown.sh
+		# ./.bluedoor | HIDDEN | .searching_mainhall.sh=false | ./.password_unknown.sh
+		# ./Barry_Help1.txt
+		# ./Barry_Help2.txt | HIDDEN | .searching_mainhall.sh=false
+	cat ./Barry_Help1.txt
+			typewriter () {
+
+				command cd to change directory to doubledoors
+				remember to to start your command with ./
+				the syntax: cd ./directory_name
+
+			}
+
+####### player command
+	cd ./doubledoors
+		#terminal: directory change to /doubledoors
+
+dir: /doubledoors
+	auto: .enter_dininghall.sh
+		typewriter () {
+
+			Together Jill and Barry passed through the double doors
+			and entered a long, extravagant dining room. The storm
+			picked up outside. The air smelled.. of…
+
+				Barry: What? What is this? . . .Blood?
+					. . .Hope this is not Chris's blood...
+
+			Jill stood behind Barry who squatted down examining the
+			puddle of blood in front of him. Before Jill could do
+			anything, a door in the far corner creaked open. . .
+
+				Jill: Who is that?
+
+			A man shambled out from under the large dining table.
+			He raised his arms, covered in blood, and groaned
+			approaching Jill and Barry.
+
+				Barry: Hey, you, stop!
+
+			The man didn't listen, only limped closer.
+			His eyes completely cloudy, as if he were already dead.
+			Behind him, Jill pointed to a body partially under the
+			table. . .
+
+			It was Kenneth, from S.T.A.R.S. Bravo Team. . .
+			his throat ripped out.
+
+				Barry: He's insane!
+
+			Barry fired his Colt .45.
+			The man . . . er, Zombie took one more step forward.
+			Then their head popped like a balloon.
+
+				Barry: What the hell?
+				Jill: Let's report this to Wesker!
+
+		}
+
+####### player command
+	ls
+		# ./Barry_Help1.txt
+		# ./Barry_Help2.txt | HIDDEN .search_mainhall.sh=false
+	cat ./Barry_Help1.txt
+		typewriter () {
+			
+			Use command ../ to return to the previous directory
+
+		}
+	cd ../
+		#terminal: directory change to /mainhall
+
+dir: /mainhall
+	auto: .searching_mainhall.sh
+		typewriter () {
+
+			Thunder roared again outside, heavy rain beat down on the
+			large windows that filled the. . . empty Main Hall.
+
+				Barry: Wesker! Help me look for him, Jill.
+					Try using command ls -la to see if
+					there's anything hidden in here...
+
+		}
+
+####### player command
+	ls
+		# ./doubledoors
+		# ./browndoor | revealed .searching_mainhall.sh=true | ./.password_unknown.sh
+		# ./bluedoor | revealed .searching_mainhall.sh=true | ./.password_unknown.sh
+		# ./Barry_Help1.txt
+		# ./Barry_Help2.txt | revealed .searching_mainhall.sh=true
+	auto: .search_mainhall.sh
+		typewriter () {
+
+			Barry: Find anything, Jill?
+			Jill: Nothing. What is this all about? I can't
+				figure it out at all.
+			Barry: Beats me, too.
+			Jill: Now it's Wesker's time to disappear! I don't
+				know what's going on.
+			Barry: Well, it can't be helped. Let's search for
+				him together. (Jill nodded.) Maybe check the
+				dining room again.
+
+		}
+
+####### player command
+	cd ./browndoor | ./.password_unknown.sh
+	cd ./bluedoor | ./.password_unknown.sh
+	cd ./doubledoors
+		#terminal: directory change to /doubledoors
+
+Dir: /doubledoors
+####### player command
+	ls
+		# ./Barry_Help1.txt
+		# ./Barry_Help2.txt | revealed .search_mainhall.sh=true
+	cat ./Barry_Help2.txt
+			typewriter () {
+				
+				Barry: Remember files can be hidden in a directory.
+					use command ls -la to search.
+
+			}
+	ls -la
+		# ./.kennethsullivan.txt
+	cat ./.kennethsullivan.txt
+		typewriter () {
+			
+			There is something in his hand, it's a LOCKPICK.
+			Perhaps it could be used on one of the doors in
+			the mainhall.
+
+		}
+
+####### player command			
+	cd ../
+		#terminal: directory change to /mainhall
+
+dir: /mainhall
+####### player command
+	ls
+			# ./doubledoors
+			# ./browndoor | ./.password_unknown.sh
+			# ./bluedoor
+		cd ./browndoor
+			# The door is locked, however it could be picked. . .
+			password: LOCKPICK
+			#terminal: directory change to /browndoor
+
+dir: /browndoor
+	auto: .enter_browndoor.sh
+		typewriter () {
+
+			Barry: Jill, you really are the master of unlocking.
+			Jill: Thanks, Barry.
+			Barry: Let's take a look around in here…
+
+		}
+
+####### player command
+	ls
+		# ./WomanStatuewithVase.txt
+		# ./HelpBarry.txt
+	cat ./WomanStatuewithVase.txt
+		# this file is empty.
+	ls -la
+		# ./.something_in_statue_vase.txt
+	cat ./.something_in_statue_vase.txt
+		typewriter () {
+
+					Keeper's Diary
+
+				May 12th, 1998.
+
+			The space suit has me itching all over — I skipped feeding the
+			dogs today out of spite, and felt better for it. By the 13th,
+			the doctor bandaged my swollen back and said I could lose the suit.
+			Then the company locked the grounds down, a researcher got shot
+			trying to leave. They changed the bluedoor password, as if there
+			was a way out through there. My skin started sloughing off in
+			chunks when I scratched.
+
+				May 19th —9—8
+
+			fever gone. Killed Scott, tasted fine.
+			heard them whisper that the blue door password was changed to
+			itchytasty
+
+			Itchy. Tasty. Itchy. Reminds me of Scott. And the others I ——
+			Tasty.
+			Itchy. Tasty. Itchy. Tasty.
+			Itchy. Tasty. Itchy. Tasty.
+
+		}
+
+####### player command
+	cd ../
+		#terminal: directory change to /mainhall
+
+dir: /mainhall
+####### player command
+	ls
+		# ./doubledoors
+		# ./browndoor
+		# ./bluedoor
+	cd ./bluedoor
+		password: itchytasty
+		#terminal: directory change to /bluedoor
+
+dir: /bluedoor
+	auto: .enter_bluedoor.sh
+		typewriter () {
+
+			Barry: It's Forest. Oh my God... It looks like he was
+			killed by another one of those monsters.
+			Jill: Barry, where did the monster go, though?
+
+			Both S.T.A.R.S. members realized there must be a
+			hidden passageway or something in this directory.
+
+		}
+
+####### player command
+	ls
+		# ./researcherswill.txt
+		# ./NEWSPAPER_CLIPPINGS.txt
+		# ./security_protocols.txt
+	cat ./researcherswill.txt
+		typewriter () {
+
+					RESEARCHER'S WILL
+
+				Yes, I'm infected.
+				I did everything I could to prevent
+				this accident from reaching the public,
+				but I can only delay the inevitable
+				for so long. . .
+
+				At least they can't call the
+				the private_elevator down there...
+
+		}
+
+####### player command
+	ls
+		# ./researcherswill.txt
+		# ./NEWSPAPER_CLIPPINGS.txt
+		# ./security_protocols.txt
+	cat ./NEWSPAPER_CLIPPINGS.txt
+		typewriter () {
+
+			strange, all these newspaper articles are
+			about S.T.A.R.S.
+			. . .
+
+		}
+
+####### player command
+	ls
+		# ./researcherswill.txt
+		# ./NEWSPAPER_CLIPPINGS.txt
+		# ./security_protocols.txt
+	cat ./security_protocols.txt
+		typewriter () {
+
+						SECURITY PROTOCOLS
+				Spencer Mansion is on lockdown. Unauthorized persons
+				attempting to leave will be shot on site.
+				Everyone with Clearance Level: Executive must exit
+				through the .privateelevator located in bluedoor and
+				head directly to the Emergency_Helipad for evacuation.
+
+						BASEMENT LEVEL ONE
+				Research_Office | For use by the Special Research Division
+				only. All other access to the Visual Data Room must be
+				cleared with Keith Arving, Room Manager.
+
+				Holding_Cells | controls the use of the prison. At least
+				one Consultant Researcher (E. Smith, S. Ross, A. Wesker)
+				must be present if viral use is authorized.
+
+				Passage_to_Helipad | is prohibited unless accompanied by
+				a Consultant Researcher or the Chief of Security.
+				Unauthorized persons entering the helipad will be
+				shot on site.
+
+				Cultivation_Room | Regarding the progress of "Tyrant" after
+				the administration of T-Virus...
+
+				(Illegible hereafter...)
+
+		}
+
+####### player command
+	ls -la
+		# ./researcherswill.txt
+		# ./NEWSPAPER_CLIPPINGS.txt
+		# ./security_protocols.txt
+		# ./.privateelevator
+	cd ./.privateelevator
+		Clearance Level Required:
+		password: executive
+		#terminal: directory change to /.privateelevator
+
+dir: ./.privateelevator
+	auto: cd ./Umbrella
+		#terminal: directory change to /Umbrella_Laboratory
+
+dir: ./Umbrella_Laboratory
+	auto: Enter_Umbrella1.sh
+		typewriter () {
+
+					Barry: What is this place?
+						Use command pwd, Jill.
+
+		}
+
+####### player command
+	pwd
+	# terminal: /Umbrella_Laboratory
+	auto: Enter_Umbrella2.sh
+		typewriter () {
+
+					Jill: An Umbrella Laboratory?
+					Barry: That huge pharmaceutical corporation?
+						What were they doing down here?
+					Jill: Creating those monsters...
+					Barry: Let's look around.
+
+		}
+####### player command
+	ls
+		# ./Research_Office
+		# ./Cultivation_Room
+		# ./Holding_Cells
+		# ./Emergency_Helipad
+	cd ./Cultivation_Room | ./.password_unknown.sh
+	cd ./Holding_Cells | ./.password_unknown.sh
+	cd ./Emergency_Helipad | ./.password_unknown.sh
+	cd ./Research_Office
+		#terminal: directory change to ./Research_Office
+
+dir: ./Research_Office
+####### player command
+	ls
+		# empty
+	ls -la
+		./.orders.txt
+	cat ./.orders.txt
+		typewriter () {
+				**********
+				CONFIDENTIAL
+				Attn: Chief of Security
+				Date: July 22, 1998 2:13
+
+				ALBERT,
+
+				X Day is drawing upon us. Execute the following
+				procedures within one week. Prompt actions are
+				demanded.
+
+				1. Lure S.T.A.R.S. to the estate, and obtain raw combat
+				data against B.O.W.s
+
+				2. Dispose of the Tyrant in the Cultivation_Room
+				password: eagle
+
+				3. Ensure complete disposal of the Arklay Laboratory
+				including all personnel and test animals. Disguise their
+				deaths as an accident. When the above procedures are
+				executed, report to headquarters for further instructions.
+
+				Good luck.
+				Umbrella Headquarters,
+				Umbrella Inc.
+
+		auto: .Suspect_Wesker.sh
+		}
+
+auto: .Suspect_Wesker.sh
+	typewriter () {
+
+		Jill: Barry... this couldn't be...
+		Barry: We need to find Captain Albert Wesker immediately.
+
+	}
+
+####### player command
+	cd ../
+		#terminal: directory change to /Umbrella_Laboratory
+
+
+dir: ./Umbrella_Laboratory
+####### player command
+	ls
+		# ./Research_Office
+		# ./Cultivation_Room
+		# ./Holding_Cells
+		# ./Emergency_Helipad
+	cd ./Holding_Cells | .gamestat Enter_Cultivation_Room.sh=false | ./.password_unknown.sh
+	cd ./Emergency_Helipad | .gamestat Enter_Cultivation_Room.sh=false | ./.password_unknown.sh
+	cd ./Cultivation_Room
+		password: eagle
+		#terminal: directory change to /Cultivation_Room
+
+dir: ./Cultivation_Room
+	auto: Enter_Cultivation_Room.sh
+		typewriter () {
+
+				Jill read the name of the directory, Cultivation_Room, on the
+				blast door. Entering the password, the blast door lifted up.
+
+				Somewhere inside, someone was typing on a keyboard.
+				Jill and Barry stepped inside. The blast door locked behind them.
+				The air was cold, and a thin fog collected around their boots.
+				Jill took a step forward, watching her wonky reflection move in
+				all the large foggy glass tubes that filled the room.
+				Through them, she saw him.
+
+					Jill: Wesker?
+					Wesker: Well, well...
+
+				Wesker didn't even turn around to look at them. Just kept
+				typing on the keyboard.
+
+					Barry: Cut the crap, Wesker.
+						We read the orders.txt...
+					Jill: Why do you have to destroy S.T.A.R.S.?
+					Wesker: That's Umbrella's intention. This laboratory has been
+						engaging in dangerous experiments, and recently, an
+						accident occurred. A virus got out. Anyway, this disaster
+						cannot be made public.
+					Jill: Is that why having S.T.A.R.S. nosing about is so
+						inconvenient? You're a slave to Umbrella, along with
+						these virus monsters.
+					Wesker: I think you misunderstand me, Jill. I'm going to
+						burn this entire laboratory. If you helped create one
+						of the most powerful biological weapons. . .
+						what would you do?
+					Jill: You must stop this now.
+					Wesker: Hmph. Idiots, no one understands its real value.
+					Jill: So you're going to steal all the research?
+					Wesker: Better yet. I'm going to show you the Tyrant.
+
+				Wesker stopped typing on the keyboard. To his left, one of the
+				large tubes started to drain. An ungodly creation inside.
+				Over 8 feet tall, with a giant mutated claw as its left hand,
+				and a giant beating heart exposed on the chest.
+
+				The Tyrant opened its eyes.
+
+					Wesker: The Tyrant is the most powerful biological weapon
+					in the entire world. All this power will be mine. . .
+
+				In one swift motion, the Tyrant broke through the glass with
+				its mutated hand.
+
+					Wesker: What? Don't come this way!
+
+				In one second, the Tyrant was out of the test tube and lifting
+				Wesker to his feet. The next, the mutated claw pierced through
+				his chest.
+
+					Barry: Jill...
+
+				Barry placed a hand on Jill. Slowly encouraging her to step back
+				quietly before... The Tyrant turned, seeing them. Nowhere to run.
+				
+				The Tyrant threw Wesker's body across the room into a panel of
+				computer devices. Then the towering monster bared its oversized
+				teeth at them.
+
+					Jill: Barry, fire!
+
+				Both S.T.A.R.S. members aimed, and fired everything into the
+				Tyrant's exposed beating heart. Barry's Colt .45 knocked the
+				Tyrant off its feet.
+
+					Overhead: THIS FACILITY WILL DETONATE!
+						ALL DOORS ARE NOW UNLOCKED!
+
+				Around them, emergency lights flashed. A loud siren blared on repeat.
+
+					Barry: Jill we have to escape!
+
+			# create .self-destruct-sequence.sh to play whenever entering a directory
+			# create .gamestat Enter_Cultivation_Room.sh=true
+			# this will remove passwords from: /Holding_Cells and ./Emergency_Helipad
+
+			}
+
+
+####### player command
+	cd ../
+		#terminal: directory change to /Umbrella_Laboratory
+
+dir: ./Umbrella_Laboratory
+	auto: .self-destruct-sequence.sh
+		typewriter () {
+			
+			[Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]
+			[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY THROUGH]
+			[Overhead: DIRECTORY: Emergency_Helipad.]
+
+		}
+
+
+####### player command
+	ls
+		# ./Research_Office
+		# ./Cultivation_Room
+		# ./Holding_Cells | .gamestat Enter_Cultivation_Room.sh=true | UNLOCKED
+		# ./Emergency_Helipad | .gamestat Enter_Cultivation_Room.sh=true | UNLOCKED
+
+##################################################################################################
+############## PLAYER HAS TWO OPTIONS: cd ./Holding_Cells or cd ./Emergency_Helipad ##############
+## IF PLAYER cd ./Emergency_Helipad = .gamestate chris_redfield=false = 65 % BAD or GOOD ENDING ##
+####### IF PLAYER cd ./Holding_Cells = .gamestate chris_redfield=true = 100% GREAT ENDING ########
+##################################################################################################	
+
+###########################################
+####### CHANCE OF BAD OR GOOD ENDING ######
+###########################################
+
+####### player command
+	cd ./Emergency_Helipad
+		#terminal: directory change to /Emergency_Helipad
+
+dir: ./Emergency_Helipad
+auto: .self-destruct-sequence.sh
+		typewriter () {
+			
+			[Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]
+			[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY THROUGH]
+
+		}
+
+auto: .JillandBarryEscape.sh
+		typewriter () {
+
+			Outside, the Emergency_Helipad was boxed in, hidden among the trees with
+			the sounds of a helicopter in the distance. The sun was starting to rise,
+			and Jill estimated that Brad was running out of fuel...
+
+			In the corner, Jill spotted a red framed box with a bright orange flare
+			gun inside. Grabbing it, she fired into the sky. Hope filled them both
+			as the sound of the helicopter got louder.
+
+			Then an explosion in the opposite corner.
+
+			The sun, rising over the mountain, cast fresh light on the chunks of
+			rubble that went flying among the large cloud of concrete dust.
+
+			Jill and Barry stared at the large black hole as the Tyrant leapt out
+			and above their heads. Landing on his feet, his eyes locked on to Jill.
+			Barry raised his gun to fire — nothing. He looked down at his Colt .45.
+
+				BARRY: Shit! I'm empty! Jill--
+
+			Jill dove away as the Tyrant dashed between them with its claw
+			jutting out. The Tyrant stood between them, looking from one to the other.
+			Deciding which one to annihilate first.
+
+				BRAD: USE THIS! KILL THAT MONSTER!
+
+			Jill looked up to see Brad descending overhead. A large green box
+			fell from the open doors. She recognized the box, which had a bright
+			yellow sticker on all sides that read: TO FIRE ENTER: rocket_launcher.
+
+				BARRY: Hey! Big guy!
+
+			Jill watched as Barry distracted the Tyrant, and she knew that right
+			now was her moment... She hurried to the box, opening it to pull out
+			the big weapon.
+
+		# Player prompted to fire — please enter the password: rocket_launcher
+
+		}
+
+
+
+####### player command
+	password: rocket_launcher
+		# .gamestate chris_redfield=false
+		# 65% Chance of "beating" Tyrant
+		# wrong password = auto: .death.sh
+
+####### BAD ENDING WITH MESSAGE
+	auto: .bad_ending.sh
+		typewriter () {
+
+			JILL FIRED THE ROCKET LAUNCHER, WATCHING AS THE TYRANT RAISED ITS GIANT CLAW,
+			DEFLECTING THE MISSILE. IT SOARED INTO THE SKY, EXPLODING AGAINST THE HELICOPTER TAIL.
+			EVERYTHING, INCLUDING BRAD, CAME CRASHING DOWN IN A BLAZE OVER JILL AND BARRY.
+			SHE WATCHED AS THE TYRANT LEAPT INTO THE AIR AWAY FROM THE EMERGENCY_HELIPAD.
+			TOWARDS. . . RACCOON_CITY. . .
+
+			AS JILL TRIED TO CRAWL AWAY, SHE HEARD THE SELF DESTRUCTION SEQUENCE COUNTDOWN.
+
+			SELF DESTRUCTION WILL DETONATE IN. . .
+			... three ...
+				... two ...
+					... o
+
+		auto: DeathEncouragement.sh
+
+		}
+
+	auto: DeathEncouragement.sh
+		typewriter () {
+
+			OH NO! -- YOU GOT THE BAD ENDING.
+			THERE'S A GOOD ENDING WAITING FOR YOU TO DISCOVER.
+			OR BETTER YET, THERE'S EVEN A GREAT ENDING TOO.
+
+			. . . G O O D  L U C K !
+
+		# reset game files
+
+		# exit and reset game
+		exit
+
+		}
+
+####### GOOD ENDING WITH MESSAGE
+	auto: .good_ending.sh
+		typewriter () {
+
+			JILL PLANTED HER FEET, AND TOOK AIM. BRACING HERSELF AS THE ROCKET LAUNCHED. THE
+			TYRANT STARED AT THE MISSILE CURIOUSLY BEFORE EXPLODING INTO A MILLION LITTLE
+			BITS THAT RAINED DOWN OVER JILL AND BARRY.
+
+			JILL PULLED BARRY TO HIS FEET AND THEY RAN FOR THE HELICOPTER AS BRAD DESCENDED.
+			INSIDE THE HELICOPTER, JILL SAT NEXT TO BARRY WATCHING THE MANSION IN THE DISTANCE.
+
+				BARRY: What about. . . Chris?
+				JILL: Everything happened so fast... I thought I saw some Holding_Cells, but. . .
+
+			IN THE DISTANCE, SIRENS FROM THE SELF DESTRUCT SEQUENCE CUT OUT.
+			THEN, THE ENTIRE MANSION EXPLODED. TAKING WITH IT ANY EVIDENCE. . .
+			AND ANY HOPE OF EVER FINDING CHRIS REDFIELD.
+
+		auto: Encouragement.sh
+
+		}
+
+	auto: Encouragement.sh
+		typewriter () {
+
+			CONGRATS -- YOU GOT THE GOOD ENDING.
+			BUT WAIT! THERE'S A GREAT ENDING WAITING FOR YOU TO DISCOVER.
+
+			. . .G O O D  L U C K !
+
+		# reset game files
+
+		# exit and reset game
+		exit
+
+		}
+
+
+###########################################
+####### HOW TO ACHIEVE GREAT ENDING #######
+###########################################
+
+####### player command
+	cd ../
+		#terminal: directory change to /Umbrella_Laboratory
+
+dir: ./Umbrella_Laboratory
+	auto: .self-destruct-sequence.sh
+		typewriter () {
+			
+			[Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]
+			[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY THROUGH]
+			[Overhead: DIRECTORY: Emergency_Helipad.]
+
+		}
+
+
+####### player command
+	ls
+		# ./Research_Office
+		# ./Cultivation_Room
+		# ./Holding_Cells | .gamestat Enter_Cultivation_Room.sh=true | UNLOCKED
+		# ./Emergency_Helipad | .gamestat Enter_Cultivation_Room.sh=true | UNLOCKED
+
+####### player command
+	cd ./Holding_Cells
+		#terminal: directory change to /Holding_Cells
+
+dir: ./Holding_Cells
+	auto: .self-destruct-sequence.sh
+		typewriter () {
+			
+			[Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]
+			[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY THROUGH]
+
+		}
+
+####### player command
+	ls
+		# CELL_1-6, CELL_8-10 ARE DEATH TRAPS. ALL SCRIPTS AT THE BOTTOM.
+		# ./Cell_1
+		# ./Cell_2
+		# ./Cell_3
+		# ./Cell_4
+		# ./Cell_5
+		# ./Cell_6
+		# ./Cell_7
+		# ./Cell_8
+		# ./Cell_9
+		# ./Cell_10
+		# ./Barry_Help.txt
+	auto: .SoManyOptions.sh
+		typewriter () {
+
+					Barry: Hmmm... There's so many cells...
+						Sounds like some might hold monsters...
+						We don't have much time, Jill.
+
+		}
+
+###########################################
+############ ALL CELL_# DEATHS ############
+###########################################
+
+####### player command
+	cd ./Cell_1
+	cd ./Cell_3
+	cd ./Cell_8
+		auto: .Zombie_death.sh
+			typewriter () {
+
+				The cell was filled with zombies.
+
+				A dozen of them. Maybe more.
+				Overpowered Jill and Barry.
+				Hands grabbed her hair.
+				Teeth at his throat.
+
+			auto: ./.death.sh
+
+			}
+
+####### player command
+	cd ./Cell_2
+	cd ./Cell_4
+	cd ./Cell_10
+		auto: .hunter_death.sh
+			typewriter () {
+
+				The cell was filled with something that shouldn't exist.
+
+				Green scaled hide. Yellow eyes that tracked Jill before she'd
+				finished turning the handle. It leapt into the air.
+
+				The claws came down in a single clean arc. Jill didn't have
+				time to react. She didn't have time to scream.
+
+				Her head hit the floor before her body did.
+
+			auto: ./.death.sh
+
+			}
+
+####### player command
+	cd ./Cell_5
+	cd ./Cell_6
+	cd ./Cell_9
+		auto: .spider_death.sh
+			typewriter () {
+
+				The cell was filled with silence.
+
+				Jill stepped inside. Empty. Just a chair, a desk, a
+				thin layer of... webs? Something shifted above her.
+
+				She looked up. Eight eyes looked back.
+
+				Legs the length of her arms wrapped around
+				her shoulders, her waist, her throat. The fangs found
+				the soft place under her jaw.
+
+				Jill's body went limp, Barry raised his gun to aim
+				but the Spider shot him with... acid? Jill couldn't
+				move, couldn't process, only watch in horror as Barry
+				melted where he stood.
+
+				Knowing she was next.
+
+			auto: ./.death.sh
+
+			}
+
+###########################################
+############ FIND CHRIS REDFIELD ############
+###########################################
+
+####### player command
+	cat ./Barry_Help.txt
+		typewriter () {
+
+				Barry: What if we search the directory
+				for his name using the commands
+				grep -r "Chris" .
+				Remember, you can always man command for
+				more instructions.
+
+		}
+
+####### player command
+	grep -r "Chris" .
+		#(terminal returns: ./Cell_7/.note.txt: Chris Redfield is in Cell_7
+	cd ./Cell_7
+		#terminal: directory change to Cell_7
+
+dir: ./Cell_7
+	.note.txt
+		typewriter () {
+
+				Chris Redfield is in Cell_7
+
+		}
+
+	auto: ./Hello.sh
+		typewriter () {
+
+			Chris: Oh Jill! Barry!
+			Jill: Oh Chris! So you're okay!
+			Chris: Yeah! You too! What happened to Wesker?
+
+				[Overhead: THE SELF-DESTRUCT SYSTEM HAS BEEN ACTIVATED.]
+				[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY.]
+
+			Jill: Let's talk about it later.
+			Barry: Let's get out of here!
+
+		# Hello.sh writes chris_rescued=true to .gamestate
+
+		}
+
+####### player command
+	cd ../
+		#terminal: directory change to Holding_Cells
+
+####### player command
+	cd ../
+		#terminal: directory change to Umbrella_Laboratory
+
+dir: ./Umbrella_Laboratory
+	auto: .self-destruct-sequence.sh
+		typewriter () {
+			
+			[Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]
+			[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY THROUGH]
+
+		}
+
+####### player command
+	ls
+		# ./Research_Office
+		# ./Cultivation_Room
+		# ./Holding_Cells
+		# ./Emergency_Helipad
+	cd ./Emergency_Helipad
+		#terminal: directory change to Emergency_Helipad
+
+dir: ./Emergency_Helipad
+	auto: .self-destruct-sequence.sh
+		typewriter () {
+
+			[Overhead: THIS FACILITY WILL DETONATE. ALL DOORS ARE NOW UNLOCKED.]
+			[Overhead: ALL PERSONNEL MUST EVACUATE IMMEDIATELY THROUGH]
+
+		}
+
+	auto: .ThreeSurvivors.sh
+		typewriter () {
+
+			Outside, the Emergency_Helipad was boxed in, hidden among the trees with
+			the sounds of a helicopter in the distance. The sun was starting to rise,
+			and Jill estimated that Brad was running out of fuel...
+
+			In the corner, Jill spotted a red framed box with a bright orange flare
+			gun inside. Grabbing it, she fired into the sky. Hope filled them both
+			as the sound of the helicopter got louder.
+
+			Then an explosion in the opposite corner.
+
+			The sun, rising over the mountain, cast fresh light on the chunks of
+			rubble that went flying among the large cloud of concrete dust.
+			Jill, Barry, and Chris stared at the large black hole as the Tyrant leapt out
+			and above their heads. Landing on his feet, his eyes locked on to Jill.
+			Barry raised his gun to fire — nothing. He looked down at his Colt .45.
+
+				BARRY: Shit! I'm empty! Jill--
+
+			Jill dove away as the Tyrant dashed between them with its claw
+			jutting out. The Tyrant stood between them, looking from Chris, to Barry,
+			and then to Jill.
+	
+			Deciding which one to annihilate first.
+
+				BRAD: USE THIS! KILL THAT MONSTER!
+
+			Jill looked up to see Brad descending overhead. A large green box
+			fell from the open doors. She recognized the box, which had a bright
+			yellow sticker on all sides that read: TO FIRE ENTER: rocket_launcher.
+
+				BARRY: Hey! Big guy!
+				CHRIS: Over here!
+
+			Jill watched as Barry and Chris distracted the Tyrant, and she knew that
+			right now was her moment... She hurried to the box, opening it to pull out
+			the big weapon.
+
+		# Player prompted to fire — please enter the password: rocket_launcher
+
+		}
+
+####### player command
+	password: rocket_launcher
+		# .gamestate chris_redfield=true
+		# 100% Chance of "beating" Tyrant
+		# wrong password = auto: .death.sh
+	auto: .great_ending.sh
+		typewriter () {
+
+			JILL PLANTED HER FEET, AND TOOK AIM. BRACING HERSELF AS THE ROCKET LAUNCHED. THE
+			TYRANT STARED AT THE MISSILE CURIOUSLY BEFORE EXPLODING INTO A MILLION LITTLE
+			BITS THAT RAINED DOWN OVER JILL, BARRY, AND CHRIS.
+
+			INSIDE THE HELICOPTER, JILL RESTED HER HEAD ON CHRIS'S SHOULDER.
+			BARRY LOADED HIS COLT .45 JUST IN CASE...
+
+			IN THE DISTANCE, SIRENS FROM THE SELF DESTRUCT SEQUENCE CUT OFF.
+			THEN, THE ENTIRE MANSION EXPLODED. TAKING WITH IT ANY EVIDENCE OF
+			TRYING TO WARN RACCOON_CITY OR THE WORLD ABOUT WHAT THEY HAD SEEN.
+
+		auto: credits_and_thank_you.sh
+
+		}
+
+	auto: credits_and_thank_you.sh
+		typewriter () {
+
+			Thank you for playing. I hope you've learned some basic linux commands
+			that can help you grow as you continue learning about this incredible
+			operating system.
+
+			If you've been following the blog posts, every aspect has been
+			detailed providing thanks to the various sources in the community that
+			I relied on to make this.
+
+			As well, if you enjoyed this, please try the next challenge:
+			More Basic Linux Commands with Jill--where her and Barry split up!
+			Same premise, different twists, not as many hints to help you survive
+			the mansion this time either...
+	
+			. . .G O O D  L U C K !
+
+		# reset game files
+
+		# exit and reset game
+		exit
+
+		}
+
+###########################################
+################## LEGEND #################
+###########################################
+
+## PASSWORDS
+## -----------------------------------------------
+## stars            | login screen                  | server login
+## spencer          | knowledge/context             | oswell_spencer_mansion
+## LOCKPICK         | .kennethsullivan.txt          | browndoor
+## itchytasty       | .something_in_statue_vase.txt | bluedoor
+## executive        | security_protocols.txt        | .privateelevator
+## eagle            | .orders.txt                   | Cultivation_Room
+## rocket_launcher  | shown on weapon box           | fire weapon / endings
+
+## COMMANDS USED & WHY
+## -----------------------------------------------
+## ls               | list contents of current directory
+## ls -la           | list all contents including hidden files
+## cd ./name        | change into a directory
+## cd ../           | go back to previous directory
+## cat ./file.txt   | read/display a file
+## pwd              | print current directory path
+## man command      | read the manual for any command
+## grep -r "term" . | search all files recursively for a term

@@ -1,0 +1,7 @@
+
+Remember the command ls ?
+That will list everything in the current directory.
+
+However, some things can be hidden by placing a '.'
+in front of the file. To see those hidden items:
+					use command 'ls -la' to search.

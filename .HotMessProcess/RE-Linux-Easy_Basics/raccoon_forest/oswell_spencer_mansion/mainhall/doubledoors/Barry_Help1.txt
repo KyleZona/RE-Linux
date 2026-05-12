@@ -1,0 +1,10 @@
+
+  Remember how ./ means "this current directory"
+  Well command ../ takes the user up one level to
+  the parent directory.
+
+  For this instance, doubledoors is within the
+  mainhall directory. 
+
+  enter command: cd ../
+

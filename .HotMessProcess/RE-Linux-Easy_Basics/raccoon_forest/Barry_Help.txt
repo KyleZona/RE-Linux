@@ -1,0 +1,32 @@
+
+
+	use command 'ls' to list out what is inside the directory.
+
+		[name@name] ~$:  ls
+		#terminal returns: Help_Barry.txt oswell_spencer_mansion
+
+	.txt = a text file (typically font color: white)
+
+	 oswell_spencer_mansion (typically font color: blue)
+		oswell_spencer_mansion is a directory.
+    
+	use command cd to change directories.
+	This command uses specific SYNTAX to navigate:
+
+	'.' means current directory
+	'/' seperates directory names in a path
+		long path: ~/RE-Linux-Easy_Basics/raccoon_forest/oswell_spencer_mansion
+		short path: ./oswell_spencer_mansion
+	'./' together -- means "starting from where I am right now..."
+
+	'cd' means to change the directory.
+	
+	all together, the correct syntax would be:
+		[name@name] ~$: cd ./oswell_spencer_mansion
+
+	! when typing Linux wll automatically bold things that do exist and
+	unbold things that it can't find. This is very helpful! Especially since
+	a lot of the names are UpperCase or-Even_like-This.
+
+		good luck! 
+
