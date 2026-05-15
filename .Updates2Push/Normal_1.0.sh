@@ -3,10 +3,18 @@
 # =============================================================================
 # Normal_1.0.sh
 # RE-Linux/Normal — Day 1: Design & Foundation
-# RE-Linux/Normal - Day 2: Scenes, Files, and Guides (oh, my!)
+# RE-Linux/Normal — Day 2: Scenes, Files, and Guides (oh, my!)
+# RE-Linux/Normal — Day 3: SourceMeToStart.sh and New Mechanics
 #
-# Run:   bash Normal_1.0.sh
+# Run:   source Normal_1.0.sh
 # =============================================================================
+
+# =============================================================================
+# GAME_DIR -- root location for the entire game
+# =============================================================================
+
+GAME_DIR="$HOME/RE-Linux/Normal"
+mkdir -p "$GAME_DIR"
 
 # =============================================================================
 # DAY 1
@@ -993,6 +1001,9 @@ typewriter_regular '        Jill: Creating those monsters...'
 typewriter_regular ''
 typewriter_regular '    She kept moving.'
 typewriter_regular ''
+typewriter_regular '    Behind her, the hatch above slammed shut and locked.'
+typewriter_regular ''
+sed -i 's/UMBRELLA_LAB_VISITED=false/UMBRELLA_LAB_VISITED=true/' "$GAME_DIR/.gamestate"
 EOF
 
 # --- suspect_wesker.sh ---
@@ -1661,6 +1672,15 @@ typewriter_regular '    You will need it over there.'
 typewriter_regular ''
 EOF
 
+# --- doubledoors/hallway/browndoor/.Barry_hidden.sh ---
+# Staged "Barry presence" file. The barry_whoami.sh scene reveals it as
+# .Barry.sh in the hallway. If the player mv's it into browndoor/ before
+# the snake fight, snake_boss_barry.sh runs instead of snake_boss.sh.
+cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway/browndoor/.Barry_hidden.sh" << 'EOF'
+# Barry is here. Presence in browndoor/ is what the cd-trigger checks for.
+# No code needed -- this file's location IS the game state.
+EOF
+
 # --- Richard_Aiken_Notes.txt (tail teaches) ---
 cat > "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway/GreenDoor/Richard_Aiken_Notes.txt" << 'EOF'
   Field Notes -- Richard Aiken, S.T.A.R.S. Bravo Team
@@ -1888,3 +1908,443 @@ EOF
 # =============================================================================
 # DAY 2 COMPLETE
 # =============================================================================
+# =============================================================================
+# DAY 3
+# =============================================================================
+
+cat > "$GAME_DIR/SourceMeToStart.sh" << 'SOURCEME'
+#!/bin/bash
+GAME_DIR="$HOME/RE-Linux/Normal"
+
+source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
+source "$GAME_DIR/.Game_Files/Design/typewriter_dramatic.sh"
+
+# Reset game state
+cp "$GAME_DIR/.Game_Files/Design/gamestate_defaults" "$GAME_DIR/.gamestate"
+
+# Reset any staged assets that may have been moved in a previous run
+if [ ! -d "$GAME_DIR/.Game_Files/staged/.hidden_ladder" ]; then
+    mkdir -p "$GAME_DIR/.Game_Files/staged/.hidden_ladder"
+fi
+
+# Reset bookcases if they were removed in a previous run
+for bc in Bookcase_1.txt Bookcase_2.txt Bookcase_3.txt; do
+    if [ ! -f "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/$bc" ]; then
+        touch "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/$bc"
+    fi
+done
+
+# Reset .hidden_ladder location
+if [ -d "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/.hidden_ladder" ]; then
+    mv "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/.hidden_ladder" \
+       "$GAME_DIR/.Game_Files/staged/.hidden_ladder" 2>/dev/null
+fi
+
+# Hide .Barry.sh until needed
+if [ -f "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway/.Barry.sh" ]; then
+    mv "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway/.Barry.sh" \
+       "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway/browndoor/.Barry_hidden.sh" 2>/dev/null
+fi
+
+# Create fresh environment file
+rm -f ~/.RE-Linux-Normal_env
+echo "export GAME_DIR=\"$GAME_DIR\"" > ~/.RE-Linux-Normal_env
+
+cat >> ~/.RE-Linux-Normal_env << 'EOF'
+function cd () {
+    builtin cd "$@"
+
+    # ---------------------------------------------------------
+    # SPENCER LOCK
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */oswell_spencer_mansion ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$SPENCER_UNLOCKED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Locks/spencer_lock.sh"
+            lock_result=$?
+            if [ $lock_result -ne 0 ]; then
+                builtin cd "$GAME_DIR/raccoon_forest"
+            else
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall"
+                source "$GAME_DIR/.Game_Files/Scenes/enter_mainhall.sh"
+            fi
+            return
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # MAINHALL LOCKDOWN -- block cd ../ above mainhall
+    # ---------------------------------------------------------
+    if [[ "$OLDPWD" == */mainhall* ]] && [[ "$PWD" != */mainhall* ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$ENTER_MANSION_COMPLETE" = "true" ]; then
+            typewriter_regular '        Jill! Do not open that door!'
+            builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall"
+        fi
+        return
+    fi
+
+    # ---------------------------------------------------------
+    # FOREST -- enter scene on first visit
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */raccoon_forest/courtyard ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$FOREST_VISITED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Scenes/enter_forest.sh"
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # BARRY FOUND -- fires when leaving courtyard back to raccoon_forest
+    # ---------------------------------------------------------
+    if [[ "$OLDPWD" == */raccoon_forest/courtyard ]] && [[ "$PWD" == */raccoon_forest ]] || \
+       [[ "$OLDPWD" == */raccoon_forest/courtyard ]] && [[ "$PWD" == */raccoon_forest/oswell_spencer_mansion* ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$BARRY_FOUND" = "false" ] && [ "$FOREST_VISITED" = "true" ]; then
+            source "$GAME_DIR/.Game_Files/Scenes/barry_found_exiting_forest.sh"
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # DOUBLEDOORS
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */doubledoors ]]; then
+        source "$GAME_DIR/.Game_Files/Scenes/enter_doubledoors.sh"
+    fi
+
+    # ---------------------------------------------------------
+    # SEARCH WESKER -- fires on return to mainhall after doubledoors
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */mainhall ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$DOUBLEDOORS_VISITED" = "true" ] && [ "$SEARCH_WESKER_PLAYED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Scenes/search_wesker.sh"
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # HALLWAY
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */doubledoors/hallway ]]; then
+        source "$GAME_DIR/.Game_Files/Scenes/enter_hallway.sh"
+    fi
+
+    # ---------------------------------------------------------
+    # GREENDOOR LOCK
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */hallway/GreenDoor ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$GREENDOOR_UNLOCKED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Locks/greendoor_lock.sh"
+            lock_result=$?
+            if [ $lock_result -ne 0 ]; then
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway"
+            else
+                source "$GAME_DIR/.Game_Files/Scenes/enter_greendoor.sh"
+            fi
+            return
+        elif [ "$GREENDOOR_VISITED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Scenes/enter_greendoor.sh"
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # HALLWAY BROWNDOOR LOCK (snake room)
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */hallway/browndoor ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$HALLWAY_BROWNDOOR_UNLOCKED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Locks/hallway_browndoor_lock.sh"
+            lock_result=$?
+            if [ $lock_result -ne 0 ]; then
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway"
+            fi
+            return
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # SNAKE BOSS
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */hallway/browndoor ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$SNAKE_DEFEATED" = "false" ]; then
+            # check if Barry is in the room (player mv'd .Barry.sh here)
+            if [ -f "$PWD/.Barry.sh" ]; then
+                source "$GAME_DIR/.Game_Files/Locks/snake_boss_barry.sh"
+            else
+                snake_attempts=$(grep "SNAKE_ATTEMPTS" "$GAME_DIR/.gamestate" | cut -d'=' -f2)
+                snake_attempts=$((snake_attempts + 1))
+                sed -i "s/SNAKE_ATTEMPTS=.*/SNAKE_ATTEMPTS=$snake_attempts/" "$GAME_DIR/.gamestate"
+                if [ "$snake_attempts" -ge 2 ] && [ "$BARRY_POISONED" = "false" ]; then
+                    sed -i 's/BARRY_POISONED=false/BARRY_POISONED=true/' "$GAME_DIR/.gamestate"
+                    source "$GAME_DIR/.Game_Files/Scenes/barry_recovery.sh"
+                    builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway"
+                    return
+                fi
+                source "$GAME_DIR/.Game_Files/Locks/snake_boss.sh"
+            fi
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # BARRY RECOVERY -- whoami scene fires once
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */doubledoors/hallway ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$BARRY_POISONED" = "true" ] && [ "$BARRY_WHOAMI_PLAYED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Scenes/barry_whoami.sh"
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # MAINHALL BROWNDOOR LOCK
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */mainhall/browndoor ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$BROWNDOOR_UNLOCKED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Locks/browndoor_lock.sh"
+            lock_result=$?
+            if [ $lock_result -ne 0 ]; then
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall"
+            else
+                source "$GAME_DIR/.Game_Files/Scenes/enter_browndoor.sh"
+            fi
+            return
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # MAINHALL BLUEDOOR LOCK
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */mainhall/bluedoor ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$BLUEDOOR_UNLOCKED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Locks/bluedoor_lock.sh"
+            lock_result=$?
+            if [ $lock_result -ne 0 ]; then
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall"
+            else
+                source "$GAME_DIR/.Game_Files/Scenes/enter_bluedoor.sh"
+            fi
+            return
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # COURTYARD (bluedoor side)
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */bluedoor/courtyard ]]; then
+        source "$GAME_DIR/.Game_Files/Scenes/enter_courtyard.sh"
+    fi
+
+    # ---------------------------------------------------------
+    # GUARDHOUSE
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */bluedoor/courtyard/guardhouse ]]; then
+        source "$GAME_DIR/.Game_Files/Scenes/enter_guardhouse.sh"
+    fi
+
+    # ---------------------------------------------------------
+    # HIDDEN LADDER LOCK
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */.hidden_ladder ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$HIDDEN_LADDER_UNLOCKED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Locks/hidden_ladder_lock.sh"
+            lock_result=$?
+            if [ $lock_result -ne 0 ]; then
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse"
+            else
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/.hidden_ladder/Umbrella_Laboratory"
+                source "$GAME_DIR/.Game_Files/Scenes/enter_umbrella.sh"
+            fi
+            return
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # RESEARCH OFFICE
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */Research_Office ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$RESEARCH_OFFICE_VISITED" = "false" ]; then
+            sed -i 's/RESEARCH_OFFICE_VISITED=false/RESEARCH_OFFICE_VISITED=true/' "$GAME_DIR/.gamestate"
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # SUSPECT WESKER -- fires on return to Umbrella_Laboratory
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */Umbrella_Laboratory ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$RESEARCH_OFFICE_VISITED" = "true" ] && [ "$SUSPECT_WESKER_PLAYED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Scenes/suspect_wesker.sh"
+            sed -i 's/SUSPECT_WESKER_PLAYED=false/SUSPECT_WESKER_PLAYED=true/' "$GAME_DIR/.gamestate"
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # CULTIVATION ROOM LOCK
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */Cultivation_Room ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$CULTIVATION_COMPLETE" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Locks/cultivation_room_lock.sh"
+            lock_result=$?
+            if [ $lock_result -ne 0 ]; then
+                builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/.hidden_ladder/Umbrella_Laboratory"
+            else
+                source "$GAME_DIR/.Game_Files/Scenes/Enter_Cultivation_Room.sh"
+            fi
+            return
+        fi
+    fi
+
+    # ---------------------------------------------------------
+    # SELF DESTRUCT -- every cd after cultivation complete
+    # ---------------------------------------------------------
+    source "$GAME_DIR/.gamestate" 2>/dev/null
+    if [ "$CULTIVATION_COMPLETE" = "true" ] && [[ "$PWD" != */Cultivation_Room ]]; then
+        source "$GAME_DIR/.Game_Files/Scenes/self-destruct-sequence.sh"
+    fi
+
+    # ---------------------------------------------------------
+    # UMBRELLA LAB LOCKDOWN -- block cd ../ above Umbrella_Laboratory
+    # once the player has entered. Same pattern as MAINHALL LOCKDOWN.
+    # ---------------------------------------------------------
+    if [[ "$OLDPWD" == */Umbrella_Laboratory* ]] && [[ "$PWD" != */Umbrella_Laboratory* ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$UMBRELLA_LAB_VISITED" = "true" ]; then
+            typewriter_regular 'The hatch is sealed from above. There is no going back.'
+            builtin cd "$OLDPWD"
+        fi
+        return
+    fi
+
+    # ---------------------------------------------------------
+    # HOLDING CELLS -- block until cultivation complete
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */Holding_Cells ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$CULTIVATION_COMPLETE" = "false" ]; then
+            typewriter_regular 'ACCESS DENIED!'
+            builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/.hidden_ladder/Umbrella_Laboratory"
+        fi
+        return
+    fi
+
+    # ---------------------------------------------------------
+    # EMERGENCY HELIPAD
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */Emergency_Helipad ]]; then
+        source "$GAME_DIR/.gamestate"
+        if [ "$CULTIVATION_COMPLETE" != "true" ]; then
+            typewriter_regular "The helipad door is sealed. There is nothing you can do to open it."
+            builtin cd "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/bluedoor/courtyard/guardhouse/.hidden_ladder/Umbrella_Laboratory"
+            return
+        fi
+        # Tyrant boss fires first
+        source "$GAME_DIR/.Game_Files/Locks/tyrant_boss.sh"
+        tyrant_result=$?
+        if [ $tyrant_result -ne 0 ]; then
+            return
+        fi
+        # Tyrant defeated -- trigger ending based on Chris rescued state
+        source "$GAME_DIR/.Game_Files/Locks/emergency_helipad_lock.sh"
+        return
+    fi
+
+    # ---------------------------------------------------------
+    # CELL LOGIC
+    # ---------------------------------------------------------
+    if [[ "$PWD" == */Holding_Cells/Cell_* ]]; then
+        for f in "$PWD/"*.sh "$PWD/".*.sh; do
+            [ -f "$f" ] && source "$f"
+        done
+    fi
+}
+
+# ---------------------------------------------------------
+# ECHO TRAP -- detect echo "Wesker?" in guardhouse
+# ---------------------------------------------------------
+function echo () {
+    builtin echo "$@"
+    source "$GAME_DIR/.gamestate" 2>/dev/null
+    if [[ "$*" == *"Wesker"* ]] && [[ "$PWD" == */guardhouse ]]; then
+        if [ "$BOOKCASES_REMOVED" = "false" ]; then
+            source "$GAME_DIR/.Game_Files/Scenes/wesker_echo_response.sh"
+        fi
+    fi
+}
+
+# ---------------------------------------------------------
+# MV TRAP -- detect player mv'ing .Barry.sh into browndoor
+# ---------------------------------------------------------
+function mv () {
+    builtin mv "$@"
+    source "$GAME_DIR/.gamestate" 2>/dev/null
+    if [ "$BARRY_REJOINED" = "false" ] && [ "$BARRY_WHOAMI_PLAYED" = "true" ]; then
+        if [ -f "$GAME_DIR/raccoon_forest/oswell_spencer_mansion/mainhall/doubledoors/hallway/browndoor/.Barry.sh" ]; then
+            sed -i 's/BARRY_REJOINED=false/BARRY_REJOINED=true/' "$GAME_DIR/.gamestate"
+            source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
+            typewriter_regular ''
+            typewriter_regular '        Barry: Right behind you, Valentine.'
+            typewriter_regular ''
+        fi
+    fi
+}
+function rm () {
+    builtin rm "$@"
+    source "$GAME_DIR/.gamestate" 2>/dev/null
+    if [[ "$PWD" == */guardhouse ]]; then
+        if [ ! -f "$PWD/Bookcase_1.txt" ] && \
+           [ ! -f "$PWD/Bookcase_2.txt" ] && \
+           [ ! -f "$PWD/Bookcase_3.txt" ] && \
+           [ "$BOOKCASES_REMOVED" = "false" ]; then
+            sed -i 's/BOOKCASES_REMOVED=false/BOOKCASES_REMOVED=true/' "$GAME_DIR/.gamestate"
+            mv "$GAME_DIR/.Game_Files/staged/.hidden_ladder" "$PWD/.hidden_ladder"
+            source "$GAME_DIR/.Game_Files/Design/typewriter_regular.sh"
+            typewriter_regular ''
+            typewriter_regular '    The bookcases clear. Behind them: a steel hatch in the floor.'
+            typewriter_regular '    A ladder descends into darkness below the Guardhouse.'
+            typewriter_regular '    A panel beside it reads:'
+            typewriter_regular '      ARKLAY RESEARCH DIVISION -- SUBLEVEL ACCESS'
+            typewriter_regular ''
+            typewriter_regular '    Use  ls -la  to see it.'
+            typewriter_regular '    The password is in the Security_Protocols.txt in the bluedoor.'
+            typewriter_regular ''
+        fi
+    fi
+}
+EOF
+
+# Add to .bashrc if not already there
+grep -qxF 'source ~/.RE-Linux-Normal_env' ~/.bashrc || echo 'source ~/.RE-Linux-Normal_env' >> ~/.bashrc
+
+# Unset cd to avoid triggering on relaunch
+unset -f cd 2>/dev/null
+
+# Move player to raccoon_forest and begin
+cd "$GAME_DIR/raccoon_forest"
+source ~/.RE-Linux-Normal_env
+source "$GAME_DIR/.Game_Files/Scenes/opening.sh"
+SOURCEME
+
+# =============================================================================
+# DAY 3 COMPLETE -- BUILD FINISHED
+# =============================================================================
+
+echo ""
+echo "  Build complete. RE-Linux/Normal is ready to play."
+echo ""
+echo "  SourceMeToStart.sh written with:"
+echo "    cd function     -- all lock logic, scene triggers, lockdown patterns"
+echo "    echo trap       -- Wesker? echo in guardhouse"
+echo "    mv trap         -- Barry.sh into browndoor detection"
+echo "    rm trap         -- bookcase removal + hidden_ladder reveal"
+echo "    reset logic     -- bookcases, .hidden_ladder, .Barry.sh on relaunch"
+echo ""
+echo "  Test the game for errors and bugs with source SourceMeToStart.sh"
+echo ""
+sleep 1
